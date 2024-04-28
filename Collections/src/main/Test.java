@@ -37,5 +37,42 @@ public class Test {
         String s1 = "Это Игорь.";
         String name = s1.substring(4, 9);
         System.out.println(name);
+
+//        String s = "Это Иван, ему 34 года, его рост 166.3 см. Должность - программист.";
+//        String name = s.substring(4, 8);
+//        int age = Integer.parseInt(s.substring(14, 16));
+//        String heightString = s.substring(32, 37);
+//        double height = Double.parseDouble(s.substring(32,37));
+//        String position = s.substring(54, 65);
+//        Man man = new Man(name, position, age, height);
+//        man.getInfo();
+        //        ArrayList<Integer> numbers = new ArrayList<>();
+//        for (int i = 0; i <= 1000; i++) {
+//            numbers.add(i);
+//        }
+//        int sum = 0;
+//        for (int i = 0; i < numbers.size(); i++) {
+//            sum += numbers.get(i);
+//        }
+//        System.out.println(sum);
+//        HashSet<String> names = new HashSet<>();
+//        names.add("John");
+//        names.add("Olga");
+//        names.add("Eugene");
+//        names.add("Maxim");
+//        names.add("Olga");
+//        for (String name : names){
+//            System.out.println(name);
+//        }
+//        TreeSet<Integer> names = new TreeSet<>();
+//        names.add(3);
+//        names.add(5);
+//        names.add(2);
+//        names.add(1);
+//        names.add(7);
+//        names.add(15);
+//        for(int name : names){
+//            System.out.println(name);
+//        }
     }
 }

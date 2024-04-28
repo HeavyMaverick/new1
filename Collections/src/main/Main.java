@@ -1,14 +1,34 @@
 package main;
 
+import java.util.ArrayList;
+//import java.util.HashSet;
+//import java.util.TreeSet;
+
 public class Main {
     public static void main(String[] args) {
-        String s = "Это Иван, ему 34 года, его рост 166.3 см. Должность - программист.";
-        String name = s.substring(4, 8);
-        int age = Integer.parseInt(s.substring(14, 16));
-        String heightString = s.substring(32, 37);
-        double height = Double.parseDouble(s.substring(32,37));
-        String position = s.substring(54, 65);
-        Man man = new Man(name, position, age, height);
-        man.getInfo();
+        ArrayList<Integer> nums = new ArrayList<>();
+        for (int i = 1; i <= 10; i++){
+            nums.add(i);
+        }
+        ArrayList<String> names = new ArrayList<>();
+        names.add("Maxim");
+        names.add("Eugene");
+        names.add("John");
+        names.add("Alexey");
+        names.add("Olga");
+        names.add("Natalya");
+        names.add("Jason");
+        names.add("Yuriy");
+        names.add("Oleg");
+        names.add("Daniil");
+        ArrayList<String> students = new ArrayList<>();
+        String s;
+        for (int i = 0, j = 0; i < nums.size(); i++){
+            students.add(nums.get(i) + " - " + names.get(j));
+            j++;
+        }
+        for (String student : students){
+            System.out.println(student);
+        }
     }
 }
