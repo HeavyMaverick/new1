@@ -1,6 +1,6 @@
-package main;
+package animals;
 
-public class Bird extends Animal implements CanRun{
+public class Bird extends Animal implements CanRun, Flyable {
     @Override
     public void eat() {
         System.out.println("Птичий корм");
@@ -9,5 +9,10 @@ public class Bird extends Animal implements CanRun{
     @Override
     public void run() {
         System.out.println("Птица бежит");
+    }
+
+    @Override
+    public void fly() {
+        System.out.println("Птица летит");
     }
 }

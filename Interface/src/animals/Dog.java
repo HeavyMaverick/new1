@@ -1,6 +1,6 @@
-package main;
+package animals;
 
-public class Dog extends Animal implements CanRun{
+public class Dog extends Animal implements CanRun {
     @Override
     public void eat() {
         System.out.println("Кость");

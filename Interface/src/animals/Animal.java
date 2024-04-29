@@ -1,4 +1,4 @@
-package main;
+package animals;
 
 public abstract class Animal {
     public abstract void eat();
