@@ -1,22 +1,13 @@
-import javax.sound.midi.Soundbank;
+import test.Empty;
 
 public class Main {
     public static void main(String[] args) {
-        int[] numbers = new int[10];
-        for(int i = 0; i < numbers.length; i++){
-            numbers[i] += i;
+        int random = 0;
+        int i = 9;
+        while (i > random){
+            random = (int) (Math.random() * 100 + 1);
         }
-        for (int i :numbers){
-            System.out.println(i);
-        }
-        try {
-            System.out.println(numbers[12]);
-        } catch (Exception e){
-            assert System.out != null;
-            System.out.println("Ошибка");
-        } finally {
-            assert System.out != null;
-            System.out.println("Мы в блоке finally");
-        }
+        String result = String.format("Ваше число: %s Попробуйте еще раз.", random);
+        System.out.println(result);
     }
 }
