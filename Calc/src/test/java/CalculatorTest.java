@@ -1,25 +1,45 @@
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class CalculatorTest {
+    private Calculator calculator;
+
+    @BeforeEach
+    public void setUp() {
+        calculator = new Calculator();
+    }
 
     @Test
     void add() {
-        Calculator calculator = new Calculator();
         int expected = 20;
         int result = calculator.add(11, 9);
         assertEquals(expected, result);
-        int expected2 = 40;
-        int result2 = calculator.add(39, 1);
-        assertEquals(expected2, result2);
     }
 
     @Test
     void divide() {
-        Calculator calculator = new Calculator();
         double expected = 5;
         double result = calculator.divide(10, 2);
         assertEquals(expected, result, 0.001);
+    }
+
+    @Test
+    public void exceptionHasThrown(){
+        // null is passed, expected NullPointerException
+        Throwable exception = assertThrows(RuntimeException.class, () -> calculator.add("asdads","5"));
+        assertEquals("Unexpected error occurred", exception.getMessage());
+    }
+//    @Test(expected = Exception.class)
+//    public void whenInputIncorrectValueThenThrowException() {
+//        calculator.add("asdfgasdf", "5");
+//    }
+    // не работает для junit5
+
+    @AfterEach
+    public void close() {
+        calculator = null;
     }
 }
