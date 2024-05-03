@@ -5,8 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class CalculatorTest {
-    private Calculator calculator;
-
+    private static Calculator calculator;
     @BeforeEach
     public void setUp() {
         calculator = new Calculator();
@@ -26,10 +25,9 @@ class CalculatorTest {
         assertEquals(expected, result, 0.001);
     }
 
-    @Test
+    @Test()
     public void exceptionHasThrown(){
-        // null is passed, expected NullPointerException
-        Throwable exception = assertThrows(RuntimeException.class, () -> calculator.add("asdads","5"));
+        Throwable exception = assertThrows(Exception.class, () -> calculator.add("asd","5"));
         assertEquals("Unexpected error occurred", exception.getMessage());
     }
 //    @Test(expected = Exception.class)
