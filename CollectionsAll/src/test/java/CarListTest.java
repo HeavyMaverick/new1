@@ -7,21 +7,46 @@ public class CarListTest {
 
     @org.junit.Before
     public void setUp() throws Exception {
+        for(int i = 0; i< 100; i++){
+            carList.add(new Car("Brand" + i, i));
+        }
     }
     @Test
     public void whenAdded100ThenSize100(){
-        for (int i = 0; i < 100; i++){
-            carList.add(new Car("Brand" + i, i));
-        }
         assertEquals(100, carList.size());
     }
     @Test
     public void whenElementRemovedByIndexThenSizeMustBeDecreased(){
-        for(int i = 0; i< 100; i++){
-            carList.add(new Car("Brand" + i, i));
-        }
-        assertEquals(100, carList.size());
         assertTrue(carList.removeAt(5));
         assertEquals(99, carList.size());
+    }
+
+    @Test
+    public void whenElementRemovedThenSizeMustBeDecreased(){
+        Car car = new Car("Toyota", 15);
+        carList.add(car);
+        assertEquals(101, carList.size());
+        assertTrue(carList.removeAt(5));
+        assertEquals(100, carList.size());
+    }
+    @Test
+    public void returnFalse(){
+        Car car = new Car("Brand", 15);
+        assertFalse(carList.remove(car));
+        assertEquals(100, carList.size());
+    }
+    @Test
+    public void whenClearSize0(){
+        carList.clear();
+        assertEquals(0,carList.size());
+    }
+    @Test(expected = Exception.class)
+    public void thrownExceptionOutOfBounds(){
+        carList.get(100);
+    }
+    @Test
+    public void getReturnedRightValue(){
+        Car car = carList.get(0);
+        assertEquals("Brand0", car.getBrand());
     }
 }
