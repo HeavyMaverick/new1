@@ -51,4 +51,11 @@ public class CarListTest {
         Car car = carList.get(0);
         assertEquals("Brand0", car.getBrand());
     }
+    @Test
+    public void insertObjectInList(){
+        Car car = new Car("Toyota", 1);
+        carList.add(car, 50);
+        Car carFromList = carList.get(50);
+        assertEquals("Toyota", carFromList.getBrand());
+    }
 }

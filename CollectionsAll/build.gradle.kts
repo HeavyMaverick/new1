@@ -10,7 +10,7 @@ repositories {
 }
 
 dependencies {
-    testImplementation("junit:junit:4.13.1")
+    testImplementation(platform("junit:junit:4.13.1"))
     implementation("junit:junit:4.13.1")
 }
 
