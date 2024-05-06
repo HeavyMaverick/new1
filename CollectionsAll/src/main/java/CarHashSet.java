@@ -85,6 +85,11 @@ public class CarHashSet implements CarSet {
     }
 
     @Override
+    public boolean contains(Car car) {
+        return true;
+    }
+
+    @Override
     public void clear() {
         array = new Entry[INITIAL_CAPACITY];
         size = 0;
