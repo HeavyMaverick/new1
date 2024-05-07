@@ -1,3 +1,5 @@
+import java.util.Iterator;
+
 public class CarHashSet implements CarSet {
     private int size = 0;
     private static final int INITIAL_CAPACITY = 16;
@@ -87,16 +89,16 @@ public class CarHashSet implements CarSet {
     @Override
     public boolean contains(Car car) {
         int pos = getElementPosition(car, array.length);
-        if (array[pos] == null){
+        if (array[pos] == null) {
             return false;
         }
         Entry elem = array[pos];
         Entry elem2 = elem.next;
-        if (elem.value.equals(car)){
+        if (elem.value.equals(car)) {
             return true;
         }
-        while (elem2 != null){
-            if (elem2.value.equals(car)){
+        while (elem2 != null) {
+            if (elem2.value.equals(car)) {
                 return true;
             } else {
                 elem2 = elem2.next;
@@ -109,6 +111,37 @@ public class CarHashSet implements CarSet {
     public void clear() {
         array = new Entry[INITIAL_CAPACITY];
         size = 0;
+    }
+
+    @Override
+    public Iterator<Car> iterator() {
+        return new Iterator<Car>() {
+            int index = 0;
+            int arrayIndex = 0;
+            Entry entry;
+
+            @Override
+            public boolean hasNext() {
+                return index < size;
+            }
+
+            @Override
+            public Car next() {
+                while (array[arrayIndex] == null){
+                    arrayIndex++;
+                }
+                if (entry == null){
+                    entry = array[arrayIndex];
+                }
+                Car result = entry.value;
+                entry = entry.next;
+                if (entry == null){
+                    arrayIndex++;
+                }
+                index++;
+                return result;
+            }
+        };
     }
 
     private static class Entry {

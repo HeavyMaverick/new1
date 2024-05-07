@@ -4,14 +4,17 @@ public class CarLinkedList implements CarList {
     @Override
     public Iterator<Car> iterator() {
         return new Iterator<Car>() {
+            private Node node = first;
             @Override
             public boolean hasNext() {
-                return false;
+                return node.next != null;
             }
 
             @Override
             public Car next() {
-                return null;
+                Car car = node.value;
+                node = node.next;
+                return car;
             }
         };
     }
