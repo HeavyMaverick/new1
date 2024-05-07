@@ -94,7 +94,14 @@ public class CarLinkedList implements CarList {
 
     @Override
     public boolean contains(Car car) {
-        return true;
+        Node elem = first;
+        for (int i = 0; i < size; i++) {
+            if (elem.value.equals(car)) {
+                return true;
+            }
+            elem = elem.next;
+        }
+        return false;
     }
 
     @Override

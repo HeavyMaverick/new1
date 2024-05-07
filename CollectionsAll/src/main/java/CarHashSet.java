@@ -10,11 +10,11 @@ public class CarHashSet implements CarSet {
 
     @Override
     public boolean add(Car car) {
-        if(size >= array.length * LOAD_FACTOR){
+        if (size >= array.length * LOAD_FACTOR) {
             increaseArray();
         }
         boolean added = add(car, array);
-        if(added){
+        if (added) {
             size++;
         }
         return added;
@@ -69,9 +69,9 @@ public class CarHashSet implements CarSet {
 
     private void increaseArray() {
         Entry[] newArray = new Entry[array.length * 2];
-        for(Entry entry : array){
+        for (Entry entry : array) {
             Entry existingElement = entry;
-            while (existingElement != null){
+            while (existingElement != null) {
                 add(existingElement.value, newArray);
                 existingElement = existingElement.next;
             }
@@ -86,7 +86,15 @@ public class CarHashSet implements CarSet {
 
     @Override
     public boolean contains(Car car) {
-        return true;
+        int pos = getElementPosition(car, array.length);
+        Entry elem = array[pos];
+        while (elem != null){
+            if (elem.value.equals(car)){
+                return true;
+            }
+            elem = elem.next;
+        }
+        return false;
     }
 
     @Override

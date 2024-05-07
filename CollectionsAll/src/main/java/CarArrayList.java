@@ -56,7 +56,12 @@ public class CarArrayList implements CarList {
 
     @Override
     public boolean contains(Car car) {
-        return true;
+        for (int i = 0; i < size; i++){
+            if (array[size].equals(car)){
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
