@@ -87,12 +87,20 @@ public class CarHashSet implements CarSet {
     @Override
     public boolean contains(Car car) {
         int pos = getElementPosition(car, array.length);
+        if (array[pos] == null){
+            return false;
+        }
         Entry elem = array[pos];
-        while (elem != null){
-            if (elem.value.equals(car)){
+        Entry elem2 = elem.next;
+        if (elem.value.equals(car)){
+            return true;
+        }
+        while (elem2 != null){
+            if (elem2.value.equals(car)){
                 return true;
+            } else {
+                elem2 = elem2.next;
             }
-            elem = elem.next;
         }
         return false;
     }
