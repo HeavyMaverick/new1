@@ -1,9 +1,16 @@
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Set;
+
 public class Main {
     public static void main(String[] args) {
-        Car car1 = new Car("BMW", 1);
-        Car car2 = new Car("BMW", 1);
-        System.out.println(car1.equals(car2));
-        System.out.println(car1.hashCode());
-        System.out.println(car2.hashCode());
+        CarCollection list = new CarArrayList();
+        for (int i = 0; i < 100; i++){
+            list.add(new Car("Brand" + i, i));
+        }
+        for (Car car : list){
+            System.out.println(car.getBrand() + " " + car.getNumber());
+        }
     }
 }

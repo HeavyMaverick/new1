@@ -1,4 +1,21 @@
+import java.util.Iterator;
+
 public class CarLinkedList implements CarList {
+    @Override
+    public Iterator<Car> iterator() {
+        return new Iterator<Car>() {
+            @Override
+            public boolean hasNext() {
+                return false;
+            }
+
+            @Override
+            public Car next() {
+                return null;
+            }
+        };
+    }
+
     private static class Node {
         private Node previous;
         private Node next;

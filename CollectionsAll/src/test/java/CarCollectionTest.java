@@ -19,4 +19,13 @@ public class CarCollectionTest {
         assertTrue(carCollection.contains(new Car("Brand11", 11)));
         assertFalse(carCollection.contains(new Car("Brand523", 20)));
     }
+
+    @Test
+    public void testForeach() {
+        int index = 0;
+        for (Car car : carCollection){
+            index++;
+        }
+        assertEquals(100,index);
+    }
 }
