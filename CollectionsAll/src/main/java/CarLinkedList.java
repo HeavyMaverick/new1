@@ -1,10 +1,11 @@
 import java.util.Iterator;
 
-public class CarLinkedList implements CarList {
+public class CarLinkedList implements CarList, CarQueue {
     @Override
     public Iterator<Car> iterator() {
         return new Iterator<Car>() {
             private Node node = first;
+
             @Override
             public boolean hasNext() {
                 return node.next != null;
@@ -38,6 +39,19 @@ public class CarLinkedList implements CarList {
     @Override
     public Car get(int index) {
         return getNode(index).value;
+    }
+
+    @Override
+    public Car peek() {
+        return size > 0 ? get(0) : null;
+    }
+
+    @Override
+    public Car poll() {
+        Car car = get(0);
+        removeAt(0);
+        return car;
+
     }
 
     @Override
