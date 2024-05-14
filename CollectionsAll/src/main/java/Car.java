@@ -1,7 +1,7 @@
 import java.util.Comparator;
 import java.util.Objects;
 
-public class Car implements Comparable<Car> {
+public class Car{
 
     private String brand;
     private int number;
@@ -34,11 +34,6 @@ public class Car implements Comparable<Car> {
     @Override
     public int hashCode() {
         return Objects.hash(brand, number);
-    }
-
-    @Override
-    public int compareTo(Car o) {
-        return brand.compareTo(o.brand);
     }
 
     @Override
