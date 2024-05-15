@@ -1,40 +1,39 @@
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.junit.Assert.*;
+
 public class CarSetTest {
-    private CarHashSet carSet;
+    private CarSet<Car> carSet;
 
     @Before
     public void setUp() throws Exception {
-        carSet = new CarHashSet();
+        carSet = new CarHashSet<>();
         for (int i = 0; i < 100; i++) {
             carSet.add(new Car("Brand" + i, i));
         }
     }
 
     @Test
-    public void testAdd1Element() {
-        Assert.assertEquals(100, carSet.size());
-        Assert.assertTrue(carSet.add(new Car("BMW", 10)));
-        Assert.assertFalse(carSet.add(new Car("BMW", 10)));
-        Assert.assertFalse(carSet.add(new Car("BMW", 10)));
-        Assert.assertEquals(101, carSet.size());
+    public void whenAdd3SimilarObjectsThenSizeIncreaseBy1() {
+        assertEquals(100, carSet.size());
+        assertTrue(carSet.add(new Car("BMW", 10)));
+        assertFalse(carSet.add(new Car("BMW", 10)));
+        assertFalse(carSet.add(new Car("BMW", 10)));
+        assertEquals(101, carSet.size());
     }
 
     @Test
-    public void testRemove1Element() {
-        Assert.assertTrue(carSet.remove(new Car("Brand40", 40)));
-        Assert.assertEquals(99, carSet.size());
-        Assert.assertFalse(carSet.remove(new Car("Brand40", 40)));
-        Assert.assertEquals(99, carSet.size());
-    }
-
-    @Test
-    public void testClearAllElements() {
+    public void whenSetClearedThenSize0() {
         carSet.clear();
-        Assert.assertEquals(0, carSet.size());
+        assertEquals(0, carSet.size());
     }
 
-
+    @Test
+    public void whenElementRemovedThenSizeDecreased() {
+        assertTrue(carSet.remove(new Car("Brand30", 30)));
+        assertEquals(99, carSet.size());
+        assertFalse(carSet.remove(new Car("Brand30", 30)));
+        assertEquals(99, carSet.size());
+    }
 }

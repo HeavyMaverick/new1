@@ -1,16 +1,14 @@
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.HashMap;
-
 import static org.junit.Assert.*;
 
 public class CarMapTest {
-    private CarMap map;
+    private CarMap<CarOwner, Car> map;
 
     @Before
     public void setUp() throws Exception {
-        map = new CarHashMap();
+        map = new CarHashMap<>();
     }
 
     @Test
