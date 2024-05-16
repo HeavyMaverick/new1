@@ -1,13 +1,22 @@
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 public class BoxTest {
 
     @Test
     public void testBox() {
-        Box<Integer> box = new Box<>(5, 10, 15);
-        Box<Float> box2 = new Box<>(5f, 10f, 15f);
-        assertEquals(0, box.compare(box2));
+        List<Integer> numbers = new ArrayList<>();
+        List<Integer> numbers2 = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            numbers.add(i);
+        }
+        Box.transfer(numbers, numbers2);
+        assertEquals(0, numbers.size());
+        assertEquals(10, numbers2.size());
     }
+
 }

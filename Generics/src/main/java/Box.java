@@ -1,4 +1,7 @@
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class Box<T extends Number> {
     private T[] array;
@@ -11,7 +14,6 @@ public class Box<T extends Number> {
         this.array = array;
     }
 
-    @SafeVarargs
     public Box(T... array) {
         this.array = array;
     }
@@ -35,5 +37,12 @@ public class Box<T extends Number> {
     }
     public void method(List<? extends Number> numbers){
 
+    }
+    public static <U> U getFirstElement(List<U> list){
+        return list.getFirst();
+    }
+    public static <U> void transfer(List<? extends U> src, List<? super U> dst){
+        dst.addAll(src);
+        src.clear();
     }
 }
