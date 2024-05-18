@@ -40,6 +40,14 @@ public class Main {
                 }
             }
         });
+        thread.start();
+        thread2.start();
+        try {
+            thread.join();
+            thread2.join();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         System.arraycopy(dst, 0, arr, 0, dst.length);
         System.arraycopy(dst2, 0, arr, 5000000, dst2.length);
         long after = System.currentTimeMillis();
