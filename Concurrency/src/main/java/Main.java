@@ -1,62 +1,68 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 public class Main {
     public static void main(String[] args) {
-        Terminal terminal = new Terminal();
-        System.out.println(terminal.getMoney());
-        Thread thread = new Thread(new Runnable() {
+        CountDownLatch countDownLatch = new CountDownLatch(3);
+        ExecutorService executorService = Executors.newFixedThreadPool(3);
+        Runnable task = new Runnable() {
             @Override
             public void run() {
-                terminal.withdrawMoney("Oleg", 15000);
-            }
-        });
-        Thread thread2 = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    thread.join();
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
+                int j = 0;
+                for (int i = 0; i < 1000000; i++) {
+                    if (i % 2 == 0) {
+                        j += i;
+                    }
                 }
-                terminal.withdrawMoney("Marina", 19999999);
+                System.out.println(j);
+                countDownLatch.countDown();
             }
-        });
-        Thread thread3 = new Thread(new Runnable() {
+        };
+        Runnable task2 = new Runnable() {
             @Override
             public void run() {
-                try {
-                    thread2.join();
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
+                int c = 0;
+                for (int i = 0; i < 1000000; i++) {
+                    if (i % 7 == 0) {
+                        c++;
+                    }
                 }
-                terminal.withdrawMoney("Alex", 5000);
+                System.out.println(c);
+                countDownLatch.countDown();
             }
-        });
-        Thread thread4 = new Thread(new Runnable() {
+        };
+        Runnable task3 = new Runnable() {
             @Override
             public void run() {
-                try {
-                    thread3.join();
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
+                List<Integer> list = new ArrayList<Integer>(1000);
+                for (int i = 0; i < 1000; i++) {
+                    list.add(i);
                 }
-                terminal.withdrawMoney("Danil", 2384900);
-            }
-        });
-        Thread thread5 = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    thread4.join();
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
+                int c = 0;
+                for (Integer i : list) {
+                    if (list.get(i) % 2 == 0) {
+                        c++;
+                    }
                 }
-                terminal.withdrawMoney("Max", 9329);
+                System.out.println(c);
+                countDownLatch.countDown();
             }
-        });
-        thread.start();
-        thread2.start();
-        thread3.start();
-        thread4.start();
-        thread5.start();
-        System.out.println(terminal.getMoney());
+        };
+        long before = System.currentTimeMillis();
+        executorService.execute(task);
+        executorService.execute(task2);
+        executorService.execute(task3);
+        executorService.shutdown();
+        try {
+            countDownLatch.await();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        long after = System.currentTimeMillis();
+        System.out.println(after - before);
     }
+
 }
