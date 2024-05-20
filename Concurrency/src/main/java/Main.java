@@ -1,50 +1,68 @@
-import java.util.SortedMap;
-import java.util.concurrent.*;
-
 public class Main {
+    private static final String A = "A";
+    private static final String B = "B";
+    private static final String C = "C";
+    private static String nextLetter = A;
+    private static final Object MONITOR = new Object();
     public static void main(String[] args) {
-        ExecutorService executorService = Executors.newFixedThreadPool(3, new ThreadFactory() {
-            @Override
-            public Thread newThread(Runnable r) {
-                Thread thread = new Thread(r);
-                thread.setDaemon(true);
-                return thread;
-            }
-        });
-        executorService.execute(new Runnable() {
+        new Thread(new Runnable() {
             @Override
             public void run() {
-                try {
-                    while (true){
-                        System.out.println("...");
-                        Thread.sleep(300);
+                synchronized (MONITOR){
+                    for(int i = 0; i < 5; i++){
+                        try {
+                            while (!nextLetter.equals(A)){
+                                MONITOR.wait();
+                            }
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                        System.out.print("A");
+                        nextLetter = B;
+                        MONITOR.notifyAll();
                     }
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
                 }
             }
-        });
-        Future<String> futureName = executorService.submit(new Callable<String>() {
+        }).start();
+        new Thread(new Runnable() {
             @Override
-            public String call() throws Exception {
-                Thread.sleep(5000);
-                return "John";
+            public void run() {
+                synchronized (MONITOR){
+                    for(int i = 0; i < 5; i++){
+                        try {
+                            while (!nextLetter.equals("B")){
+                                MONITOR.wait();
+                            }
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                        System.out.print("B");
+                        nextLetter = C;
+                        MONITOR.notifyAll();
+
+                    }
+                }
             }
-        });
-        Future<Integer> futureAge = executorService.submit(new Callable<Integer>() {
+        }).start();
+        new Thread(new Runnable() {
             @Override
-            public Integer call() throws Exception {
-                Thread.sleep(5000);
-                return 22;
+            public void run() {
+                synchronized (MONITOR){
+                    for(int i = 0; i < 5; i++){
+                        try {
+                            while (!nextLetter.equals(C)){
+                                MONITOR.wait();
+                            }
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                        System.out.print("C");
+                        nextLetter = A;
+                        MONITOR.notifyAll();
+                    }
+                }
             }
-        });
-        try {
-            String name = futureName.get();
-            int age = futureAge.get();
-            System.out.println("\nName " + name + " age " + age);
-        } catch (InterruptedException | ExecutionException e) {
-            throw new RuntimeException(e);
-        }
+        }).start();
     }
 
 }
