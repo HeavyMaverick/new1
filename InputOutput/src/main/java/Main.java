@@ -1,25 +1,25 @@
-import java.io.File;
-import java.io.FilenameFilter;
-import java.io.IOException;
+import java.io.*;
 
 public class Main {
     public static void main(String[] args){
-        File directory = new File("folder1/folder2/folder3");
-        File file1 = new File("folder1/folder2/folder3/afile1.txt");
-        File file2 = new File("folder1/folder2/folder3/bfile2.txt");
-        File file3 = new File("folder1/folder2/folder3/cile3.txt");
+        File directory = new File("folder1");
+        File file = new File("folder1/names1.txt");
+        directory.mkdir();
         try {
-            directory.mkdirs();
-            file1.createNewFile();
-            file2.createNewFile();
-            file3.createNewFile();
+            file.createNewFile();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        String[] files = directory.list((dir, name) -> name.startsWith("a"));
-        for (String f : files){
-            System.out.println(f);
-        }
+        try (InputStream inputStream = new FileInputStream(file);) {
+            int a = inputStream.read();
+            while (a != -1){
+                System.out.print(((char) a));
+                a = inputStream.read();
+            }
 
+        }catch (Exception e){
+            throw new RuntimeException(e);
+
+        }
     }
 }
